@@ -6,3 +6,6 @@ include(FetchContent)
     GIT_TAG  9.1.0
     )
 FetchContent_MakeAvailable(name_library)
+
+target_link_libraries(
+   name_library )
