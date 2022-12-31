@@ -1,0 +1,20 @@
+
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
+include(AddGitSubmodule)
+add_git_submodule(external/json)
+
+target_link_libraries(untitled38 Qt${QT_VERSION_MAJOR}::Core
+    nlohmann_json)
+    
+ ############################################################################3
+ function(add_git_submodule dir)
+ 	find_package(Git REQUIRED)
+
+	if(NOT EXISTS ${dir}/CMakeLists.txt)
+	   execute_process(COMMAND ${GIT_EXECUTABLE}
+		submodule update --init --recursive -- ${dir}
+		WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+	endif()
+	
+	add_subdirectory(${dir})
+endfunction(add_git_submodule)
